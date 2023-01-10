@@ -5,3 +5,6 @@
 {"level":"INFO","time":"2023-01-09T22:02:05.374+0800","caller":"bluebell/main.go:83","msg":"Server exiting"}
 {"level":"DEBUG","time":"2023-01-09T22:14:25.708+0800","caller":"bluebell/main.go:37","msg":"logger init success~~~"}
 {"level":"DEBUG","time":"2023-01-09T22:14:34.524+0800","caller":"bluebell/main.go:37","msg":"logger init success~~~"}
+{"level":"DEBUG","time":"2023-01-10T10:20:35.554+0800","caller":"bluebell/main.go:35","msg":"logger init success~~~"}
+{"level":"INFO","time":"2023-01-10T10:21:01.604+0800","caller":"bluebell/main.go:72","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-01-10T10:21:01.619+0800","caller":"bluebell/main.go:81","msg":"Server exiting"}
