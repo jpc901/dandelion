@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bluebell/controller"
 	"bluebell/dao/mysql"
 	"bluebell/dao/redis"
 	"bluebell/logger"
@@ -53,8 +54,14 @@ func main() {
 		return
 	}
 
+	// 初始化gin框架内置的校验使用的翻译器
+	// 利用validator库参数校验 https://www.liwenzhou.com/posts/Go/validator-usages/
+	if err := controller.InitTrans("zh"); err != nil {
+		fmt.Printf("init validator trans failed, err:%v\n", err)
+		return
+	}
 	// 5.注册路由
-	r := routers.Setup()
+	r := routers.SetupRouter()
 
 	// 6.启动服务(优雅关机)
 	srv := &http.Server{
