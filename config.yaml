@@ -2,7 +2,9 @@ app:
   name: "web_app"
   mode: "dev"
   port: 8081
-  version: "v0.1.1"
+  start_time: "2009-01-01"
+  machine_id: 1
+  version: "v0.0.1"
 log:
   level: "debug"
   filename: "web_app.log"

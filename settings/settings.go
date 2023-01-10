@@ -15,6 +15,8 @@ type AppConfig struct {
 	Name         string `mapstructure:"name"`
 	Mode         string `mapstructure:"mode"`
 	Version      string `mapstructure:"version"`
+	StartTime    string `mapstructure:"start_time"`
+	MachineID    int64  `mapstructure:"machine_id"`
 	Port         int    `mapstructure:"port"`
 	*LogConfig   `mapstructure:"log"`
 	*MySQLConfig `mapstructure:"mysql"`
@@ -66,7 +68,7 @@ func Init() (err error) {
 	viper.OnConfigChange(func(in fsnotify.Event) {
 		fmt.Println("配置文件修改了~~~")
 		if err := viper.Unmarshal(Conf); err != nil {
-			fmt.Printf("viper.Unmarshal failed, err:%s \n", err);
+			fmt.Printf("viper.Unmarshal failed, err:%s \n", err)
 		}
 	})
 	return
