@@ -3,6 +3,7 @@ package routers
 import (
 	"bluebell/controller"
 	"bluebell/logger"
+	"bluebell/middlewares"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -21,8 +22,16 @@ func SetupRouter(mode string) *gin.Engine {
 	// 登录业务路由
 	r.POST("/login", controller.LoginHandler)
 
-	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "ok")
+	r.GET("/", middlewares.JWTAuthMiddleware(), func(c *gin.Context) {
+		// 如果是登录的用户, 判断请求头中是否有有效的JWT
+		c.Request.Header.Get("Authorization")
+		c.String(http.StatusOK, "登录成功")
+	})
+
+	r.NoRoute(func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"msg": "404",
+		})
 	})
 	return r
 }
