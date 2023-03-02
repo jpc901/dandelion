@@ -279,3 +279,11 @@
 {"level":"INFO","time":"2023-02-15T16:41:47.772+0800","caller":"logger/logger.go:79","msg":"/api/v1/community","status":200,"method":"GET","path":"/api/v1/community","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.30.1","errors":"","cost":0.0007038}
 {"level":"INFO","time":"2023-02-15T16:42:36.589+0800","caller":"bluebell/main.go:87","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2023-02-15T16:42:36.602+0800","caller":"bluebell/main.go:96","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-03-02T08:32:39.324+0800","caller":"backend/main.go:37","msg":"logger init success~~~"}
+{"level":"DEBUG","time":"2023-03-02T08:33:51.270+0800","caller":"backend/main.go:37","msg":"logger init success~~~"}
+{"level":"INFO","time":"2023-03-02T08:36:08.942+0800","caller":"logger/logger.go:79","msg":"/api/v1/posts2","status":200,"method":"GET","path":"/api/v1/posts2","query":"page=1&order=time","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36","errors":"","cost":0.0005326}
+{"level":"INFO","time":"2023-03-02T08:59:41.640+0800","caller":"logger/logger.go:79","msg":"/api/v1/login","status":200,"method":"POST","path":"/api/v1/login","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36","errors":"","cost":0.0393607}
+{"level":"INFO","time":"2023-03-02T08:59:41.846+0800","caller":"logger/logger.go:79","msg":"/api/v1/posts2","status":200,"method":"GET","path":"/api/v1/posts2","query":"page=1&order=time","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2023-03-02T08:59:46.488+0800","caller":"logger/logger.go:79","msg":"/api/v1/community","status":200,"method":"GET","path":"/api/v1/community","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36","errors":"","cost":0.001187}
+{"level":"INFO","time":"2023-03-02T09:01:00.015+0800","caller":"backend/main.go:87","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-03-02T09:01:00.030+0800","caller":"backend/main.go:96","msg":"Server exiting"}
