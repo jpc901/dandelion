@@ -2,8 +2,9 @@ package jwt
 
 import (
 	"errors"
-	"github.com/spf13/viper"
 	"time"
+
+	"github.com/spf13/viper"
 
 	"github.com/dgrijalva/jwt-go"
 )

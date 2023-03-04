@@ -37,6 +37,7 @@ func CommunityDetailHandler(c *gin.Context) {
 	if err != nil {
 		zap.L().Error("logic.GetCommunityDetail() failed", zap.Error(err))
 		ResponseError(c, CodeServerBusy) // 不轻易把服务端报错暴露给外面
+		return
 	}
 	ResponseSuccess(c, data)
 }
