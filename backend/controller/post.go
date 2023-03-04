@@ -3,12 +3,14 @@ package controller
 import (
 	"bluebell/logic"
 	"bluebell/models"
+	"strconv"
 
 	"go.uber.org/zap"
 
 	"github.com/gin-gonic/gin"
 )
 
+// CreatePostHandler 创建帖子
 func CreatePostHandler(c *gin.Context) {
 	// 1. 获取参数及参数校验
 	p := new(models.Post)
@@ -36,4 +38,26 @@ func CreatePostHandler(c *gin.Context) {
 	// 4. 返回响应
 	ResponseSuccess(c, nil)
 
+}
+
+// GetPostDetailHandler 获取帖子详情
+func GetPostDetailHandler(c *gin.Context) {
+	//1.获取参数（取出url中id）
+	pidStr := c.Param("id")
+	pid, err := strconv.ParseInt(pidStr, 10, 64) // 10进制，64位
+	if err != nil {
+		zap.L().Error("get post detail with invalid param", zap.Error(err))
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	//fmt.Println(pid)
+	//2.根据id取出帖子数据（查询数据库）
+	data, err := logic.GetPostById(pid)
+	if err != nil {
+		zap.L().Error("logic.GetPostById(pid) failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	////3.返回响应
+	ResponseSuccess(c, data)
 }
