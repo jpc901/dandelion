@@ -63,7 +63,6 @@ func Init() (err error) {
 	}
 
 	// 把读取到配置信息反序列化到Conf 变量中
-
 	if err := viper.Unmarshal(Conf); err != nil {
 		fmt.Printf("viper.Unmarshal failed, err:%v\n", err)
 	}

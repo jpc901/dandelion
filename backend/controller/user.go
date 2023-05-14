@@ -4,7 +4,10 @@ import (
 	"bluebell/dao/mysql"
 	"bluebell/logic"
 	"bluebell/models"
+	"bluebell/pkg/jwt"
 	"errors"
+	"fmt"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
@@ -61,7 +64,7 @@ func LoginHandler(c *gin.Context) {
 		return
 	}
 	// 2.业务逻辑处理
-	token, err := logic.Login(p)
+	user, err := logic.Login(p)
 	if err != nil {
 		zap.L().Error("logic.Login failed", zap.String("username", p.Username), zap.Error(err))
 		if errors.Is(err, mysql.ErrorUserNotExist) {
@@ -73,5 +76,37 @@ func LoginHandler(c *gin.Context) {
 	}
 
 	// 3.返回响应
-	ResponseSuccess(c, token)
+	ResponseSuccess(c, gin.H{
+		"user_id":       fmt.Sprintf("%d", user.UserID), // id值大于1<<53-1就会造成数据丢失（int64最大值是1<<63-1）
+		"user_name":     user.Username,
+		"access_token":  user.AToken,
+		"refresh_token": user.RToken,
+	})
+}
+
+func RefreshTokenHandler(c *gin.Context) {
+	rt := c.Query("refresh_token")
+	// 客户端携带Token有三种方式 1.放在请求头 2.放在请求体 3.放在URI
+	// 这里假设Token放在Header的Authorization中，并使用Bearer开头
+	// 这里的具体实现方式要依据你的实际业务情况决定
+	authHeader := c.Request.Header.Get("Authorization")
+	if authHeader == "" {
+		ResponseErrorWithMsg(c, CodeInvalidToken, "请求头缺少Auth Token")
+		c.Abort()
+		return
+	}
+	// 按空格分割
+	parts := strings.SplitN(authHeader, " ", 2)
+	if !(len(parts) == 2 && parts[0] == "Bearer") {
+		ResponseErrorWithMsg(c, CodeInvalidToken, "Token格式不对")
+		c.Abort()
+		return
+	}
+	aToken, rToken, err := jwt.RefreshToken(parts[1], rt)
+	fmt.Println(err)
+	// 3.返回响应
+	ResponseSuccess(c, gin.H{
+		"access_token":  aToken,
+		"refresh_token": rToken,
+	})
 }

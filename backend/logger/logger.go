@@ -30,6 +30,7 @@ func Init(cfg *settings.LogConfig, mode string) (err error) {
 	if err != nil {
 		return
 	}
+	// 设置模式对应的日志输出位置
 	var core zapcore.Core
 	if mode == "dev" {
 		// 进入到开发模式，日志输出到终端

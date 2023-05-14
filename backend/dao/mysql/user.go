@@ -16,7 +16,7 @@ const secret = "jpcly.cn"
 func CheckUserExist(username string) (err error) {
 	sqlStr := `select count(user_id) from user where username = ?`
 	var count int
-	if err := db.Get(&count, sqlStr, username); err != nil {
+	if err = db.Get(&count, sqlStr, username); err != nil {
 		return err
 	}
 	if count > 0 {
