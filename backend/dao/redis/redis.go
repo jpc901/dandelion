@@ -7,7 +7,10 @@ import (
 	"github.com/go-redis/redis"
 )
 
-var rdb *redis.Client
+var (
+	rdb *redis.Client
+	Nil = redis.Nil
+)
 
 // Init 初始化连接
 func Init(cfg *settings.RedisConfig) (err error) {

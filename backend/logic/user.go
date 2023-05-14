@@ -5,6 +5,7 @@ import (
 	"bluebell/models"
 	"bluebell/pkg/jwt"
 	"bluebell/pkg/snowflake"
+	"fmt"
 )
 
 // 存放业务逻辑
@@ -41,5 +42,6 @@ func Login(p *models.ParamsLogin) (user *models.User, err error) {
 	aToken, rToken, err = jwt.GenToken(user.UserID, user.Username)
 	user.AToken = aToken
 	user.RToken = rToken
+	fmt.Println(user.AToken, user.RToken)
 	return
 }
