@@ -10,7 +10,16 @@ import (
 
 //--- 跟社区相关 ---
 
-// CommunityHandler 获取所有社区信息
+// CommunityHandler 查询所有社区
+// @Summary 查询所有社区
+// @Description 查询到所有的社区 (community_id, community_name) 以列表的形式返回
+// @Tags 社区
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
+// @Security ApiKeyAuth
+// @Success 200
+// @Router /api/v1/community [get]
 func CommunityHandler(c *gin.Context) {
 	// 查询所有的社区 community_id community_name 以列表的形式返回
 
@@ -23,6 +32,16 @@ func CommunityHandler(c *gin.Context) {
 }
 
 // CommunityDetailHandler 社区分类详情
+// @Summary 概况
+// @Description 描述
+// @Tags 社区
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
+// @Param id path string true "社区id"
+// @Security ApiKeyAuth
+// @Success 200
+// @Router /api/v1/community/{id} [get]
 func CommunityDetailHandler(c *gin.Context) {
 	// 1. 获取社区id
 	idStr := c.Param("id")                     // 获取URL参数

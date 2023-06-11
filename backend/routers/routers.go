@@ -2,11 +2,14 @@ package routers
 
 import (
 	"bluebell/controller"
+	_ "bluebell/docs"
 	"bluebell/logger"
 	"bluebell/middlewares"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func SetupRouter(mode string) *gin.Engine {
@@ -15,7 +18,6 @@ func SetupRouter(mode string) *gin.Engine {
 	}
 	r := gin.New()
 	r.Use(logger.GinLogger(), logger.GinRecovery(true))
-
 	v1 := r.Group("/api/v1")
 
 	// 注册业务路由
@@ -37,7 +39,7 @@ func SetupRouter(mode string) *gin.Engine {
 		v1.GET("/posts2", controller.GetPostListHandler2)
 		v1.POST("/vote", controller.PostVoteController)
 	}
-
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"msg": "404",

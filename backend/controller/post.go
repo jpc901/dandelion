@@ -11,6 +11,16 @@ import (
 )
 
 // CreatePostHandler 创建帖子
+// @Summary 创建帖子
+// @Description 创建新帖子，存入数据库并在redis中记录该帖子的分数和所处社区
+// @Tags 帖子
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT_AToken"
+// @Param obj body models.Post false "参数"
+// @Security ApiKeyAuth
+// @Success 200 {object} _ResponseCreatePost
+// @Router /api/v1/post [post]
 func CreatePostHandler(c *gin.Context) {
 	// 1. 获取参数及参数校验
 	p := new(models.Post)
@@ -41,6 +51,16 @@ func CreatePostHandler(c *gin.Context) {
 }
 
 // GetPostDetailHandler 获取帖子详情
+// @Summary 通过post id获取post详情
+// @Description 通过post id获取post内容以及所所在社区和作者名
+// @Tags 帖子
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
+// @Param id path int64 true "帖子id"
+// @Security ApiKeyAuth
+// @Success 200 {object} _ResponsePostDetail
+// @Router /api/v1/post/{id} [get]
 func GetPostDetailHandler(c *gin.Context) {
 	//1.获取参数（取出url中id）
 	pidStr := c.Param("id")
@@ -63,6 +83,17 @@ func GetPostDetailHandler(c *gin.Context) {
 }
 
 // GetPostListHandler 或缺帖子列表接口
+// @Summary 概况
+// @Description 描述
+// @Tags 帖子
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
+// @Param page path string false "页码"
+// @Param size path string false "页面大小"
+// @Security ApiKeyAuth
+// @Success 200 {object} _ResponsePostList
+// @Router /api/v1/posts [post]
 func GetPostListHandler(c *gin.Context) {
 
 	page, size := getPageInfo(c)
@@ -77,9 +108,16 @@ func GetPostListHandler(c *gin.Context) {
 }
 
 // GetPostListHandler2 根据时间或者分数获取帖子列表， 升级版
-// 1. 获取参数
-// 2. 去redis查询id列表
-// 3. 根据id去数据库查询帖子详情
+// @Summary 获取帖子分页数据
+// @Description 根据社区id（可以为空）、页码、数量返回分页数据
+// @Tags 帖子
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
+// @Param object query models.ParamPostList false "查询参数"
+// @Security ApiKeyAuth
+// @Success 200 {object} _ResponsePostList
+// @Router /api/v2/posts [get]
 func GetPostListHandler2(c *gin.Context) {
 
 	op, err := strconv.ParseInt(c.Query("community_id"), 10, 64)

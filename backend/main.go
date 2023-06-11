@@ -20,7 +20,13 @@ import (
 	"go.uber.org/zap"
 )
 
-// Go Web开发比较通用的脚手架模板
+// @title GoWeb论坛
+// @version 1.0
+// @description 使用gin mysql redis 实现的web论坛
+// @contact.name Jia Pengcheng
+// @contact.url https://jpcly.cn
+// @host 127.0.0.1:8081
+// @BasePath /
 func main() {
 	// 1.加载配置文件
 	if err := settings.Init(); err != nil {

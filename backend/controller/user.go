@@ -15,6 +15,14 @@ import (
 )
 
 // SignUpHandler 处理注册请求的函数
+// @Summary 注册
+// @Description 注册
+// @Tags 用户
+// @Accept application/json
+// @Produce application/json
+// @Param obj body models.ParamSignUp true "用户注册参数"
+// @Success 200
+// @Router /api/v1/signup [post]
 func SignUpHandler(c *gin.Context) {
 	// 1.获取参数和参数校验
 	// ShouldBindJSON让gin框架自动的从请求里面将数据绑定到结构体里面
